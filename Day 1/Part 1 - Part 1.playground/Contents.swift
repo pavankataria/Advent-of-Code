@@ -33,6 +33,7 @@ let input = "(((())))()((((((((())()(()))(()((((()(()(((()((()((()(()()()()()))(
  * go upstairs and go downstairs instruction, the totals of these instructions 
  * would then be subtracted from each other to come to a final floor count.
  */
+
 let upstairs = input.componentsSeparatedByString("(").count
 let downstairs = input.componentsSeparatedByString(")").count
 let floor = upstairs - downstairs
@@ -45,16 +46,21 @@ print("Santa should end up on floor: \(floor)")
  * behaviour is mimicked by stepping through each character (instruction) of the
  * input array and adjusting the currentFloor value until the end is reached.
 */
-var currentFloor = 0
-for instruction in input.characters {
+func computeInstruction(instruction: Character, var floor: Int) -> Int{
     switch instruction {
     case "(":
-        currentFloor += 1
+        floor += 1
     case ")":
-        currentFloor -= 1
+        floor -= 1
     default:
         break;
     }
+    return floor
+}
+
+var currentFloor = 0
+for instruction in input.characters {
+    currentFloor = computeInstruction(instruction, floor: currentFloor)
 }
 print("Santa should end up on floor: \(currentFloor)")
 

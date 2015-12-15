@@ -17,7 +17,7 @@ let instructions = "(((())))()((((((((())()(()))(()((((()(()(((()((()((()(()()()
  * while keeping track of the character instruction position until Santa reaches floor -1.
  */
 
-func computerInstruction(instruction: Character, var floor: Int) -> Int{
+func computeInstruction(instruction: Character, var floor: Int) -> Int{
     switch instruction {
     case "(":
         floor += 1
@@ -30,8 +30,9 @@ func computerInstruction(instruction: Character, var floor: Int) -> Int{
 }
 
 var currentFloor = 0
+
 for (index, instruction) in instructions.characters.enumerate(){
-    currentFloor = computerInstruction(instruction, floor: currentFloor)
+    currentFloor = computeInstruction(instruction, floor: currentFloor)
     if currentFloor == -1 {
         // index of 1 instead of 0 for human readability
         let characterPosition = index + 1
