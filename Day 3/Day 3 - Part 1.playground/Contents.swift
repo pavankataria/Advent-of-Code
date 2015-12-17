@@ -53,19 +53,28 @@ enum CardinalDirection: Character {
     case West = "<"
 }
 struct Santa {
-    let position: Coordinate
+    var position: Coordinate
     init(){
         position = Coordinate.init(x: 0, y: 0)
     }
-    func moveInDirection(direction: CardinalDirection) {
-        
+    mutating func moveInDirection(direction: CardinalDirection) {
+        switch direction {
+        case .North:
+            position.y--
+        case .East:
+            position.x++
+        case .South:
+            position.y++
+        case .West:
+            position.x--
+        }
     }
 }
 
 
 class ChristmasTracker {
     var houses = [String : House]()
-    let santa = Santa()
+    var santa = Santa()
     let listOfDirections: String
     
     init(){
