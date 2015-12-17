@@ -81,21 +81,20 @@ class ChristmasTracker {
         listOfDirections = getInputFromFile("input", withExtension: "txt")
     }
     
-    private func deliverPresentAtSantasLocation() {
-        if var house = houses[santa.position.stringPosition()]{
+    private func deliverPresentAtLocation(coordinate: Coordinate) {
+        if var house = houses[coordinate.stringPosition()]{
             house.addPresent()
         }
         else {
-            let santasPosition = santa.position
-            houses[santasPosition.stringPosition()] = House.init(coordinate: santasPosition, withPresentsCount:1)
+            houses[coordinate.stringPosition()] = House.init(coordinate: coordinate, withPresentsCount:1)
         }
     }
     func deliverPresentsToTheGoodChildren(){
-        deliverPresentAtSantasLocation()
+        deliverPresentAtLocation(santa.position)
         for rawDirection in listOfDirections.characters {
             if let direction = CardinalDirection.init(rawValue: rawDirection) {
                 santa.moveInDirection(direction)
-                deliverPresentAtSantasLocation()
+                deliverPresentAtLocation(santa.position)
             }
         }
     }
