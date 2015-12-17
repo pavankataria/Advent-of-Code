@@ -102,5 +102,9 @@ class ChristmasTracker {
 
 let xMasTracker = ChristmasTracker()
 xMasTracker.deliverPresentsToTheGoodChildren()
+let numberOfHousesThatReceivedPresents = xMasTracker.houses.count
+
+print("\(numberOfHousesThatReceivedPresents) are the number of houses that received at least one present")
+
 
 

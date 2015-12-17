@@ -20,7 +20,7 @@ import Foundation
 
 
 func getInputFromFile(fileName: String, withExtension ext: String) -> String{
-    let fileURL = NSBundle.mainBundle().URLForResource("input", withExtension: "txt")
+    let fileURL = NSBundle.mainBundle().URLForResource(fileName, withExtension: ext)
     assert(fileURL != nil, "input.txt file not found.")
     let content = try! String(contentsOfURL: fileURL!, encoding: NSUTF8StringEncoding)
     return content
