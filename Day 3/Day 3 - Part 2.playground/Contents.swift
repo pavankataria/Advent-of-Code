@@ -55,20 +55,29 @@ enum CardinalDirection: Character {
     case West = "<"
 }
 struct Santa {
-    let position: Coordinate
+    var position: Coordinate
     init(){
         position = Coordinate.init(x: 0, y: 0)
     }
-    func moveInDirection(direction: CardinalDirection) {
-        
+    mutating func moveInDirection(direction: CardinalDirection) {
+        switch direction {
+        case .North:
+            position.y--
+        case .East:
+            position.x++
+        case .South:
+            position.y++
+        case .West:
+            position.x--
+        }
     }
 }
 
 
 class ChristmasTracker {
     var houses = [String : House]()
-    let santa = Santa()
-    let roboSanta = Santa()
+    var santa = Santa()
+    var roboSanta = Santa()
     
     let listOfDirections: String
     
@@ -81,8 +90,8 @@ class ChristmasTracker {
         if var house = houses[coordinate.stringPosition()]{
             house.addPresent()
         }
-        /* if a key is not found, add a new object with key being the new coordinate
-          and value being a new house with present value being 1 */
+            /* if a key is not found, add a new object with key being the new coordinate
+            and value being a new house with present value being 1 */
         else {
             houses[coordinate.stringPosition()] = House.init(coordinate: coordinate, withPresentsCount:1)
         }
@@ -90,25 +99,25 @@ class ChristmasTracker {
     func deliverPresentsToTheGoodChildren(){
         deliverPresentAtLocation(Coordinate.init(x: 0, y: 0))
         deliverPresentAtLocation(Coordinate.init(x: 0, y: 0))
-
+        
         for (index, rawDirection) in listOfDirections.characters.enumerate() {
             let direction = CardinalDirection.init(rawValue: rawDirection)
             if direction == nil {
                 continue
             }
-
+            
             if(index % 2 == 0) {
                 print("santa's turn to deliver")
                 santa.moveInDirection(direction!)
                 deliverPresentAtLocation(santa.position)
-
+                
             }
             else {
                 print("roboSanta's turn to deliver")
                 roboSanta.moveInDirection(direction!)
                 deliverPresentAtLocation(roboSanta.position)
             }
-
+            
         }
     }
 }
